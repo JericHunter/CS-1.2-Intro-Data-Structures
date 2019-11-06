@@ -32,7 +32,7 @@ def histogram_tuple(file):
     histogram = []
     amount = 0
     for word in text:
-        print(histogram)
+        # print(histogram)
         is_updated = False
         for tuple in histogram:
             if tuple[0] == word:
@@ -57,8 +57,9 @@ def frequency_dic(word,histogram):
         if iterate == word:
             return keys
 
+
 if __name__ == "__main__":
-    histogram = (histogram('txt_files/testing.txt'))
+    histogram = (histogram_tuple('txt_files/testing.txt'))
     unique_words = unique_words(histogram)
     word = 'greatest'
     word_freq = frequency(word,histogram)
