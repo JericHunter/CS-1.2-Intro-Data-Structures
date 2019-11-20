@@ -1,74 +1,82 @@
-def read_words(file):
-    with open(file, "r") as f:
+def read_file(text_file):
+    with open(text_file, 'r') as f:
         words = f.read().split()
+
     return words
 
-def histogram(file):
-    text = read_words(file)
+
+def histogram(text_file):
+    ''' Returns a list of lists '''
+
+    text = read_file(text_file)
     histogram = []
+
     for word in text:
-        is_updated = False
+        updated = False
         for list in histogram:
-            if list[0] == word:
+            if word == list[0]:
                 list[1] += 1
-                is_updated = True
-        if is_updated == False:
-            histogram.append([word,1])
+                updated = True
+                break
+
+        if updated == False:
+            histogram.append([word, 1])
+
     return histogram
 
-def histogram_dict(file):
-    text = read_words(file)
-    histogram = {}
-    for word in text:
+def histogram_dict(words_list):
+    '''Returns dictionary'''
+
+    histogram = dict()
+
+    for word in words_list:
         if word in histogram:
             histogram[word] += 1
+
         else:
             histogram[word] = 1
+
     return histogram
 
-
-def histogram_tuple(file):
-    text = read_words(file)
-    histogram = []
+def histogram_tuple(text_file):
+    '''Returns tuple'''
+    text = read_file(text_file)
     amount = 0
+    histogram = []
+
     for word in text:
-        # print(histogram)
-        is_updated = False
+        updated = False
         for tuple in histogram:
             if tuple[0] == word:
-                amount = tuple[1] +1
+                amount = tuple[1] + 1
                 histogram.remove(tuple)
-                histogram.append((word,amount))
-                is_updated = True
-        if is_updated == False:
+                histogram.append((word, amount))
+                updated = True
+        if updated == False:
             histogram.append((word, 1))
+
     return histogram
 
+
 def unique_words(histogram):
-    return len(histogram)
+    '''Returns total count of unique words based off of histogram data for list of lists.'''
+    count = 0
+    for list in histogram:
+        count += 1
+
+    return count
 
 def frequency(word, histogram):
+    '''Returns how many times a specific word is in a histogram data set for list of lists'''
+
     for list in histogram:
         if list[0] == word:
             return list[1]
 
-def frequency_dic(word,histogram):
-    for iterate, keys in histogram.items():
-        if iterate == word:
-            return keys
 
 
-if __name__ == "__main__":
-    histogram = (histogram_tuple('txt_files/testing.txt'))
-    unique_words = unique_words(histogram)
-    word = 'greatest'
-    word_freq = frequency(word,histogram)
+if __name__ == '__main__':
+    words_list = read_file('testing.txt')
+    histogram = histogram_dict(words_list)
 
     print(histogram)
-    print(f'Unique words: {unique_words}')
-    print(f'Amount of "{word}": {word_freq}' )
-
-    histogram_dict = (histogram_dict('txt_files/testing.txt'))
-    word_frequency_dict = frequency_dic(word, histogram_dict)
-    print(histogram_dict)
-    print(word_frequency_dict)
