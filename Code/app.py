@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
-from sample import main_sample, prob_word, get_count, sentence
+from sample import sampling, word_probability, get_count, sentence
 from histogram import histogram_dict, read_file
 from pymongo import MongoClient
 
