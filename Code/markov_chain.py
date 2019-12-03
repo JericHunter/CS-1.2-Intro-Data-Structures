@@ -60,7 +60,7 @@ class MarkovChain(dict):
 
 if __name__ == "__main__":
 
-    words_list = cleanup_text_file('histo_sample_song.txt')
+    words_list = cleanup_text_file('testing.txt')
     markov_chain = MarkovChain(words_list = words_list)
 
     # print(markov_chain)
