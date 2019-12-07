@@ -54,7 +54,7 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-    Running time: O(n) due to looping through and checkng each node  """
+    Running time: O(1) best case if linked list has one node and O(n) is worst case due to looping through and checkng each n node  """
         # TODO: Loop through all nodes and count one for each
         current_node = self.head
         count = 0
@@ -84,15 +84,14 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
         new_node = Node(item)
-        if self.head is None:
-            self.tail = new_node
+        if self.head == None:
+            self.head = self.tail = new_node
         else:
             new_node.next = self.head
             self.head = new_node
-
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-     Best case running time: O(n) because you loop through looking for a node in the best case it would be the head
+     Best case running time: O(1) because you loop through looking for a node in the best case it would be the head
      Worst case running time: O(n) because you loop through looking for a node in the worst case it would be the tail"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
@@ -104,7 +103,7 @@ class LinkedList(object):
         return None
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-     Best case running time: O(n) because you loop through looking for a node in the best case it would be the head
+     Best case running time: O(1) because you loop through looking for a node in the best case it would be the head
      Worst case running time: O(n) because you loop through looking for a node in the worst case it would be the tail"""
         # TODO: Loop through all nodes to find one whose data matches given item
         # TODO: Update previous node to skip around node with matching data
