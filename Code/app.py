@@ -1,30 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
-import os
-from sample import sampling, word_probability, get_count, sentence
 from histogram import histogram_dict, read_file
-from pymongo import MongoClient
-
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/csmarkov')
-
-client = MongoClient(host=host)
-client = MongoClient(host=f'{host}?retryWrites=false')
-db = client.get_default_database()
-
+from markov_chain import higher_order, higher_order_walk, new_chain, create_sentence, order_sample, cleanup_text_file
+import random
 
 app = Flask(__name__)
 
-
 @app.route('/')
-def index():
-    text_file = read_file('txt_files/testing.txt')
-    histogram = histogram_dict(text_file)
-    count = get_count(histogram_dict(text_file))
-    total = len(text_file)
+def show_phrase():
+    words = cleanup_text_file('txt_files/houseofquiet.txt')
+    word_list = words.split()
+    sentence = higher_order_walk(word_list, 40)
 
-    # ' '.join(sentence(count, total, histogram))
-    rand_sentence = sentence(count, total, histogram)
-    return render_template('index.html', rand_sentence=rand_sentence)
+    return render_template('index.html', sentence=sentence)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0')

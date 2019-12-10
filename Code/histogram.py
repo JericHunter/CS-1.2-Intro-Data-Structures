@@ -1,14 +1,14 @@
-def read_file(text_file):
-    with open(text_file, 'r') as f:
+def read_file(words_list):
+    with open(words_list, 'r') as f:
         words = f.read().split()
 
     return words
 
 
-def histogram(text_file):
+def histogram(words_list):
     ''' Returns a list of lists '''
 
-    text = read_file(text_file)
+    text = read_file(words_list)
     histogram = []
 
     for word in text:
@@ -38,9 +38,9 @@ def histogram_dict(words_list):
 
     return histogram
 
-def histogram_tuple(text_file):
+def histogram_tuple(words_list):
     '''Returns tuple'''
-    text = read_file(text_file)
+    text = read_file(words_list)
     amount = 0
     histogram = []
 
